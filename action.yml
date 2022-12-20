@@ -1,0 +1,38 @@
+name: 'Generate PDF from hugo site'
+
+description: 'Greet someone and record the time'
+inputs:
+  hugo-version:
+    description: 'The version of Hugo'
+    required: true
+  hugo-extended:
+    description: 'Use the extended version of hugo'
+    required: false
+    default: true
+  slides-path:
+    description: 'The path were the hugo site is located'
+    required: false
+    default: './'
+  pdf-output-name:
+    description: 'The name of the file output'
+    required: false
+    default: 'slides.pdf'
+  decktape-args:
+    description: 'Extra argument to decktape'
+    required: false
+    default: ''
+  url-path:
+    description: 'Path in URL where the site is served'
+    required: false
+    default: ''
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.hugo-version }}
+    - ${{ inputs.hugo-extended }}
+    - ${{ inputs.slides-path }}
+    - ${{ inputs.pdf-output-name }}
+    - ${{ inputs.decktape-args }}
+    - ${{ inputs.url-path }}
